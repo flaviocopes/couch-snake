@@ -21,7 +21,7 @@ xcodebuild test -project Snake.xcodeproj -scheme Snake -destination 'platform=tv
 xcrun xcresulttool export attachments --path build/test.xcresult --output-path build/shots
 ```
 
-The tests boot the simulator headless, no window opens. The UI test's screenshots end up in `build/shots`. CI runs `scripts/ci-test.sh`: only `SnakeTests`, with `CODE_SIGNING_ALLOWED=NO`, on a throwaway simulator. Some GitHub runner images have no tvOS platform, so the script downloads it when it's missing.
+The tests boot the simulator headless, no window opens. The UI test's screenshots end up in `build/shots`.
 
 To install on a paired Apple TV, find its name with `xcrun devicectl list devices`, then:
 

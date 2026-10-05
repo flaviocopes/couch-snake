@@ -4,6 +4,10 @@ Snake is the classic snake game from old mobile phones, rebuilt for the Apple TV
 
 Everything on screen is made of chunky dot-matrix pixels, the score included. The snake goes through the walls and comes out the other side, so the only way to lose is to bite yourself.
 
+Read the announcement and watch the 30-second demo on my blog: [I built Snake, the classic phone game for the Apple TV](https://flaviocopes.com/snake/).
+
+[![Watch the 30-second Snake demo](docs/showreel-poster.jpg)](https://flaviocopes.com/snake/)
+
 ## Features
 
 - Full screen, on a 30 by 15 board drawn as LCD pixels

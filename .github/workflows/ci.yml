@@ -1,0 +1,20 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: macos-26
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v6
+      - run: >-
+          xcodebuild test -project Snake.xcodeproj -scheme Snake
+          -destination 'platform=tvOS Simulator,name=Apple TV 4K (3rd generation)'
+          -only-testing:SnakeTests CODE_SIGNING_ALLOWED=NO

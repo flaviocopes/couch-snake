@@ -1,0 +1,49 @@
+name: Snake
+options:
+  bundleIdPrefix: com.flaviocopes
+  deploymentTarget:
+    tvOS: "18.0"
+settings:
+  base:
+    SWIFT_VERSION: "6.0"
+    MARKETING_VERSION: "1.0.0"
+    CURRENT_PROJECT_VERSION: "1"
+    CODE_SIGN_STYLE: Automatic
+    DEVELOPMENT_TEAM: DGFKNTAG99
+targets:
+  Snake:
+    type: application
+    platform: tvOS
+    sources: [Snake]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.flaviocopes.snake
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_CFBundleDisplayName: Snake
+        INFOPLIST_KEY_LSApplicationCategoryType: public.app-category.arcade-games
+  SnakeTests:
+    type: bundle.unit-test
+    platform: tvOS
+    sources: [SnakeTests]
+    dependencies:
+      - target: Snake
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+  SnakeUITests:
+    type: bundle.ui-testing
+    platform: tvOS
+    sources: [SnakeUITests]
+    dependencies:
+      - target: Snake
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+schemes:
+  Snake:
+    build:
+      targets:
+        Snake: all
+    test:
+      targets: [SnakeTests, SnakeUITests]

@@ -41,8 +41,8 @@ struct SnakeGame {
 
   var score: Int { snake.count - 3 }
 
-  /// The snake speeds up as it grows.
-  var interval: Duration { .milliseconds(max(60, 150 - 3 * score)) }
+  /// The time between two steps. The snake keeps the same speed for the whole game.
+  let interval = Duration.milliseconds(180)
 
   mutating func resume() {
     if state == .ready || state == .paused {
@@ -57,15 +57,17 @@ struct SnakeGame {
   }
 
   /// Queues a turn for the next steps, so two quick swipes make a U-turn.
-  mutating func turn(_ newDirection: Direction) {
+  /// Returns false when it ignores the turn: the same or the opposite direction, or a full queue.
+  @discardableResult
+  mutating func turn(_ newDirection: Direction) -> Bool {
     if state == .ready {
       state = .playing
     }
-    guard state == .playing, turns.count < 3 else { return }
+    guard state == .playing, turns.count < 3 else { return false }
     let last = turns.last ?? direction
-    if newDirection != last && newDirection != last.opposite {
-      turns.append(newDirection)
-    }
+    guard newDirection != last && newDirection != last.opposite else { return false }
+    turns.append(newDirection)
+    return true
   }
 
   mutating func step() {

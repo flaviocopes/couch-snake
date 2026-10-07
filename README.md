@@ -11,7 +11,7 @@ Read the announcement and watch the 30-second demo on my blog: [I built Snake, t
 ## Features
 
 - Full screen, on a 30 by 15 board drawn as LCD pixels
-- The snake speeds up a little with every piece of food, up to two and a half times its starting speed
+- The snake keeps the same speed for the whole game, and every piece of food makes it one segment longer
 - Turns queue up, so two quick swipes make a U-turn
 - The snake blinks when it dies
 - Your best score is saved, and shows top right as `HI`

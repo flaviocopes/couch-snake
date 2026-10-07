@@ -3,7 +3,12 @@ import SwiftUI
 struct GameView: View {
   @State private var game = SnakeGame()
   @State private var snakeHidden = false
-  @AppStorage("best") private var best = 0
+  @State private var sounds = Sounds()
+  @State private var players = Players()
+  @State private var showsPlayers = false
+  /// The screen color of the current game. It starts on the last one, so the first game ever
+  /// gets the first color, the LCD green.
+  @AppStorage("screen") private var screen = Color.screens.count - 1
   @Environment(\.scenePhase) private var scenePhase
 
   var body: some View {
@@ -19,11 +24,13 @@ struct GameView: View {
       }
     }
     .foregroundStyle(Color.ink)
-    .background(Color.lcd)
+    .background(screenColor)
+    .animation(.easeInOut(duration: 0.5), value: screen)
     .focusable(interactions: .activate)
     .focusEffectDisabled()
     .onMoveCommand(perform: turn)
     .onTapGesture(perform: click)
+    .onAppear(perform: nextScreen)
     .onPlayPauseCommand(perform: playPause)
     .onExitCommand(perform: exitAction)
     .task(id: game.state) {
@@ -38,17 +45,23 @@ struct GameView: View {
         game.pause()
       }
     }
-    .onChange(of: game.score) {
-      best = max(best, game.score)
+    .onChange(of: game.score) { oldScore, newScore in
+      if newScore > oldScore {
+        sounds.playFood()
+      }
+      players.record(newScore)
+    }
+    .fullScreenCover(isPresented: $showsPlayers) {
+      PlayersView(players: players, background: screenColor, choose: choose)
     }
   }
 
   @ViewBuilder
   private var message: some View {
     switch game.state {
-    case .ready: MessageBox(title: "SNAKE", detail: "Swipe to start")
-    case .paused: MessageBox(title: "PAUSED", detail: "Click to continue")
-    case .over: MessageBox(title: "GAME OVER", detail: "Click to play again")
+    case .ready: MessageBox(title: "SNAKE", detail: "Swipe to start", hint: "Play/Pause for players", background: screenColor)
+    case .paused: MessageBox(title: "PAUSED", detail: "Click to continue", background: screenColor)
+    case .over: MessageBox(title: "GAME OVER", detail: "Click to play again", hint: "Play/Pause for players", background: screenColor)
     case .playing: EmptyView()
     }
   }
@@ -77,28 +90,53 @@ struct GameView: View {
   }
 
   private func turn(_ direction: MoveCommandDirection) {
+    let turned: Bool
     switch direction {
-    case .up: game.turn(.up)
-    case .down: game.turn(.down)
-    case .left: game.turn(.left)
-    case .right: game.turn(.right)
-    @unknown default: break
+    case .up: turned = game.turn(.up)
+    case .down: turned = game.turn(.down)
+    case .left: turned = game.turn(.left)
+    case .right: turned = game.turn(.right)
+    @unknown default: turned = false
     }
+    if turned {
+      sounds.playTurn()
+    }
+  }
+
+  private var screenColor: Color {
+    Color.screens[screen % Color.screens.count]
+  }
+
+  /// Every new game gets the next screen color.
+  private func nextScreen() {
+    screen = (screen + 1) % Color.screens.count
   }
 
   private func click() {
     if game.state == .over {
       game = SnakeGame()
+      nextScreen()
     } else {
       game.resume()
     }
   }
 
+  /// A new player after a game over gets a fresh board.
+  private func choose(_ player: Player) {
+    players.select(player)
+    showsPlayers = false
+    if game.state == .over {
+      game = SnakeGame()
+      nextScreen()
+    }
+  }
+
+  /// Play/Pause pauses and resumes a game. Between games it opens the players screen.
   private func playPause() {
-    if game.state == .playing {
-      game.pause()
-    } else {
-      game.resume()
+    switch game.state {
+    case .playing: game.pause()
+    case .paused: game.resume()
+    case .ready, .over: showsPlayers = true
     }
   }
 
@@ -122,8 +160,10 @@ struct GameView: View {
     }
 
     write(String(format: "%04d", game.score), x: 0)
-    let hi = "HI " + String(format: "%04d", best)
+    let hi = "HI " + String(format: "%04d", players.current.best)
     write(hi, x: layout.columns - hi.count * 4 + 1)
+    let name = players.current.name
+    write(name, x: (layout.columns - name.count * 4 + 1) / 2)
 
     let top = LCDLayout.headerHeight
     for x in 0..<layout.columns {
@@ -236,6 +276,8 @@ struct UnlitPixels: View {
 struct MessageBox: View {
   let title: String
   let detail: String
+  var hint: String?
+  let background: Color
 
   var body: some View {
     VStack(spacing: 20) {
@@ -243,16 +285,23 @@ struct MessageBox: View {
         .font(.system(size: 80, weight: .black, design: .monospaced))
       Text(detail)
         .font(.system(size: 38, weight: .bold, design: .monospaced))
+      if let hint {
+        Text(hint)
+          .font(.system(size: 28, weight: .semibold, design: .monospaced))
+          .opacity(0.7)
+      }
     }
     .padding(.horizontal, 70)
     .padding(.vertical, 44)
-    .background(Color.lcd)
+    .background(background)
     .border(Color.ink, width: 9)
   }
 }
 
-/// A 3x5 pixel font, read left to right, top to bottom.
+/// A 3x5 pixel font, read left to right, top to bottom. Player names use the letters,
+/// so `Players.name(from:)` keeps names to what's here.
 private let glyphs: [Character: String] = [
+  " ": "000000000000000",
   "0": "111101101101111",
   "1": "010110010010111",
   "2": "111001111100111",
@@ -263,12 +312,48 @@ private let glyphs: [Character: String] = [
   "7": "111001001001001",
   "8": "111101111101111",
   "9": "111101111001111",
+  "A": "010101111101101",
+  "B": "110101110101110",
+  "C": "011100100100011",
+  "D": "110101101101110",
+  "E": "111100110100111",
+  "F": "111100110100100",
+  "G": "011100101101011",
   "H": "101101111101101",
   "I": "111010010010111",
+  "J": "001001001101010",
+  "K": "101101110101101",
+  "L": "100100100100111",
+  "M": "101111111101101",
+  "N": "110101101101101",
+  "O": "010101101101010",
+  "P": "110101110100100",
+  "Q": "010101101110011",
+  "R": "110101110101101",
+  "S": "011100010001110",
+  "T": "111010010010010",
+  "U": "101101101101111",
+  "V": "101101101101010",
+  "W": "101101111111101",
+  "X": "101101010101101",
+  "Y": "101101010010010",
+  "Z": "111001010100111",
 ]
 
-// Same colors as the icon in scripts/render-icon.swift.
 extension Color {
-  static let lcd = Color(red: 0.780, green: 0.941, blue: 0.847)
-  static let ink = Color(red: 0.263, green: 0.322, blue: 0.239)
+  // Same colors as the icon in scripts/render-icon.swift.
+  static let lcd = Color(hex: 0xC7F0D8)
+  static let ink = Color(hex: 0x43523D)
+
+  /// The pastel screen colors, one per game in this order. Neighbors are far apart in hue,
+  /// so every new game looks different. They all need to stay pale for the ink to read.
+  static let screens: [Color] = [
+    .lcd, Color(hex: 0xF8F1C0), Color(hex: 0xE2D9F3), Color(hex: 0xF9DCC4),
+    Color(hex: 0xCFE5F5), Color(hex: 0xF7D4E0), Color(hex: 0xDCEEC3), Color(hex: 0xD5DCF5),
+    Color(hex: 0xEEE4CC), Color(hex: 0xC9EEEA), Color(hex: 0xEBD6EE), Color(hex: 0xF8D2C8),
+  ]
+
+  init(hex: UInt32) {
+    self.init(red: Double((hex >> 16) & 0xFF) / 255, green: Double((hex >> 8) & 0xFF) / 255, blue: Double(hex & 0xFF) / 255)
+  }
 }

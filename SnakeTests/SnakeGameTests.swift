@@ -53,6 +53,12 @@ struct SnakeGameTests {
     #expect(game.snake[0] == Cell(x: 4, y: 6))
   }
 
+  @Test func turnSaysWhetherItCounts() {
+    var game = game()
+    let results = [Direction.right, .left, .up, .left, .down, .right].map { game.turn($0) }
+    #expect(results == [false, false, true, true, true, false])
+  }
+
   @Test func swipeStartsTheGame() {
     var game = SnakeGame()
     game.turn(.up)
@@ -81,6 +87,13 @@ struct SnakeGameTests {
     game.step()
     #expect(game.state == .playing)
     #expect(game.snake[0] == Cell(x: 5, y: 6))
+  }
+
+  @Test func keepsTheSameSpeedAsItGrows() {
+    var game = game()
+    #expect(game.interval == .milliseconds(180))
+    game.snake += Array(repeating: Cell(x: 0, y: 9), count: 40)
+    #expect(game.interval == .milliseconds(180))
   }
 
   @Test func pausedGameDoesNotMove() {

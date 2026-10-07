@@ -28,6 +28,29 @@ final class SnakeUITests: XCTestCase {
   }
 
   @MainActor
+  func testPlayPauseOpensThePlayers() {
+    let app = XCUIApplication()
+    app.launch()
+    let remote = XCUIRemote.shared
+
+    XCTAssertTrue(app.staticTexts["Play/Pause for players"].waitForExistence(timeout: 10))
+    remote.press(.playPause)
+    XCTAssertTrue(app.staticTexts["PLAYERS"].waitForExistence(timeout: 3))
+    attachScreenshot("players")
+
+    remote.press(.down)
+    remote.press(.select)
+    XCTAssertTrue(app.alerts["New player"].waitForExistence(timeout: 3))
+    attachScreenshot("new player")
+    remote.press(.menu)
+    XCTAssertTrue(app.alerts["New player"].waitForNonExistence(timeout: 3))
+
+    remote.press(.menu)
+    XCTAssertTrue(app.staticTexts["PLAYERS"].waitForNonExistence(timeout: 3))
+    XCTAssertTrue(app.staticTexts["Swipe to start"].exists, "Play/Pause started the game")
+  }
+
+  @MainActor
   private func attachScreenshot(_ name: String) {
     let attachment = XCTAttachment(screenshot: XCUIScreen.main.screenshot())
     attachment.name = name

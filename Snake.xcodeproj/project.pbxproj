@@ -10,9 +10,15 @@
 		0150CF48152746039F2C5D14 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 572F2257B6A9F6CFD971F5DB /* Assets.xcassets */; };
 		094ECCD0D9F88E35F8FD74D2 /* SnakeGameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D967B0EF2E8D65DE377505B2 /* SnakeGameTests.swift */; };
 		31C80A8335B9A035E992485B /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11271056826FC1A11040CBA0 /* GameView.swift */; };
+		376F454DACC3A8B3957CE69E /* Sounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = B301E32D7693D8ADD403BA25 /* Sounds.swift */; };
+		3C254D503C80B93697474BEC /* turn.wav in Resources */ = {isa = PBXBuildFile; fileRef = 394162B2374ADBC5BD7ABD89 /* turn.wav */; };
 		3C76276CF20E2755B77A30CA /* SnakeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381EB4B2E00BA29899993B1E /* SnakeUITests.swift */; };
 		56D4CB915D0F49D170460D3D /* SnakeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3348C53D85E9636ABBEDB1 /* SnakeApp.swift */; };
+		574345F4C2D02F0B0AAB165E /* PlayersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A13CD8C04DD29E7030355E0 /* PlayersView.swift */; };
+		6440DB65CCB01956763489A1 /* Players.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6155D66CF8B0E0BEA1889F05 /* Players.swift */; };
 		6C4F2E715144A53E1460D3B1 /* SnakeGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A4EEB4D8DF4460CC0E0859 /* SnakeGame.swift */; };
+		7F4A1369E54F2FF452FA50DC /* PlayersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E05E0A301C04E2E0F53E58 /* PlayersTests.swift */; };
+		B5F4239709CC8A062D310030 /* food.wav in Resources */ = {isa = PBXBuildFile; fileRef = 2AC57D651487A4856F541693 /* food.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,12 +40,18 @@
 
 /* Begin PBXFileReference section */
 		11271056826FC1A11040CBA0 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
+		2AC57D651487A4856F541693 /* food.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = food.wav; sourceTree = "<group>"; };
 		381EB4B2E00BA29899993B1E /* SnakeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnakeUITests.swift; sourceTree = "<group>"; };
+		394162B2374ADBC5BD7ABD89 /* turn.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = turn.wav; sourceTree = "<group>"; };
 		41A4EEB4D8DF4460CC0E0859 /* SnakeGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnakeGame.swift; sourceTree = "<group>"; };
 		572F2257B6A9F6CFD971F5DB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5A8FF5F7F10D579E292BDF34 /* SnakeUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = SnakeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6155D66CF8B0E0BEA1889F05 /* Players.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Players.swift; sourceTree = "<group>"; };
+		63E05E0A301C04E2E0F53E58 /* PlayersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersTests.swift; sourceTree = "<group>"; };
 		6F95FEE8F2AA8C064E279751 /* Snake.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Snake.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A13CD8C04DD29E7030355E0 /* PlayersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersView.swift; sourceTree = "<group>"; };
 		AB3348C53D85E9636ABBEDB1 /* SnakeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnakeApp.swift; sourceTree = "<group>"; };
+		B301E32D7693D8ADD403BA25 /* Sounds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sounds.swift; sourceTree = "<group>"; };
 		BF474C86EE281E2ECABA543B /* SnakeTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = SnakeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D967B0EF2E8D65DE377505B2 /* SnakeGameTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnakeGameTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -63,13 +75,26 @@
 			path = SnakeUITests;
 			sourceTree = "<group>";
 		};
+		22E8C8E94F602657DB6565DF /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				2AC57D651487A4856F541693 /* food.wav */,
+				394162B2374ADBC5BD7ABD89 /* turn.wav */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
 		7607FFADB7B30A6123624187 /* Snake */ = {
 			isa = PBXGroup;
 			children = (
 				572F2257B6A9F6CFD971F5DB /* Assets.xcassets */,
 				11271056826FC1A11040CBA0 /* GameView.swift */,
+				6155D66CF8B0E0BEA1889F05 /* Players.swift */,
+				7A13CD8C04DD29E7030355E0 /* PlayersView.swift */,
 				AB3348C53D85E9636ABBEDB1 /* SnakeApp.swift */,
 				41A4EEB4D8DF4460CC0E0859 /* SnakeGame.swift */,
+				B301E32D7693D8ADD403BA25 /* Sounds.swift */,
+				22E8C8E94F602657DB6565DF /* Sounds */,
 			);
 			path = Snake;
 			sourceTree = "<group>";
@@ -77,6 +102,7 @@
 		A6C6949028DB17FFB79B1315 /* SnakeTests */ = {
 			isa = PBXGroup;
 			children = (
+				63E05E0A301C04E2E0F53E58 /* PlayersTests.swift */,
 				D967B0EF2E8D65DE377505B2 /* SnakeGameTests.swift */,
 			);
 			path = SnakeTests;
@@ -200,6 +226,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				0150CF48152746039F2C5D14 /* Assets.xcassets in Resources */,
+				B5F4239709CC8A062D310030 /* food.wav in Resources */,
+				3C254D503C80B93697474BEC /* turn.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,8 +247,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				31C80A8335B9A035E992485B /* GameView.swift in Sources */,
+				6440DB65CCB01956763489A1 /* Players.swift in Sources */,
+				574345F4C2D02F0B0AAB165E /* PlayersView.swift in Sources */,
 				56D4CB915D0F49D170460D3D /* SnakeApp.swift in Sources */,
 				6C4F2E715144A53E1460D3B1 /* SnakeGame.swift in Sources */,
+				376F454DACC3A8B3957CE69E /* Sounds.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -228,6 +259,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F4A1369E54F2FF452FA50DC /* PlayersTests.swift in Sources */,
 				094ECCD0D9F88E35F8FD74D2 /* SnakeGameTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

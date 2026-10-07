@@ -14,7 +14,10 @@ Read the announcement and watch the 30-second demo on my blog: [I built Snake, t
 - The snake keeps the same speed for the whole game, and every piece of food makes it one segment longer
 - Turns queue up, so two quick swipes make a U-turn
 - The snake blinks when it dies
-- Your best score is saved, and shows top right as `HI`
+- Player profiles, each with their own best score, and a scoreboard ranked by best
+- A soft blip when you turn and a coin sound when you eat
+- Twelve pastel screen colors, rotating with each new game
+- Your player name shows above the board, and your best score shows top right as `HI`
 - The game pauses when you leave the app
 
 <img src="docs/screenshot.png" alt="Snake on the Apple TV, with the snake, the food and the start message on a green LCD screen" />
@@ -23,14 +26,14 @@ Read the announcement and watch the 30-second demo on my blog: [I built Snake, t
 
 - **Swipe** up, down, left or right to turn. On the newer Siri Remote, clicking the edges of the clickpad works too. Your first swipe starts the game.
 - **Click** to start, to continue after a pause, and for a new game after game over.
-- **Play/Pause** pauses and resumes.
+- **Play/Pause** pauses and resumes. Between games, it opens the players screen. Click a name to play as that person, hold it to delete it, or choose **Add a player**.
 - **Back**, or **Menu** on older remotes, pauses a running game. When the game isn't running, it goes back to the Home screen.
 
 ## Install it on your Apple TV
 
 The Apple TV can't install apps from a download, and Snake isn't on the App Store. You install it from Xcode on your own Apple TV, which takes a few minutes the first time:
 
-1. Put the Mac and the Apple TV on the same network. On the Apple TV, open **Settings → Remotes and Devices → Remote App and Devices**.
+1. Download [Snake-1.1.0-source.zip](https://github.com/flaviocopes/snake/releases/download/v1.1.0/Snake-1.1.0-source.zip) and unzip it. Put the Mac and the Apple TV on the same network. On the Apple TV, open **Settings → Remotes and Devices → Remote App and Devices**.
 2. In Xcode, open **Window → Devices and Simulators**, click **Pair** next to your Apple TV, and type the code it shows.
 3. Open `Snake.xcodeproj`, choose the `Snake` scheme and your Apple TV, and set your own team under **Signing & Capabilities**.
 4. Press `⌘R`.

@@ -1,12 +1,12 @@
-<img src="docs/banner.png" alt="Snake, the classic phone game, full screen on your Apple TV" />
+<img src="docs/banner.png" alt="Couch Snake, the classic phone game, full screen on your Apple TV" />
 
-Snake is the classic snake game from old mobile phones, rebuilt for the Apple TV. It fills the TV with a pale green LCD screen, and you steer the snake by swiping on the Siri Remote.
+Couch Snake is the classic snake game from old mobile phones, rebuilt for the Apple TV. It fills the TV with a pale green LCD screen, and you steer the snake by swiping on the Siri Remote.
 
 Everything on screen is made of chunky dot-matrix pixels, the score included. The snake goes through the walls and comes out the other side, so the only way to lose is to bite yourself.
 
-Read the announcement and watch the 30-second demo on my blog: [I built Snake, the classic phone game for the Apple TV](https://flaviocopes.com/snake/).
+Read the announcement and watch the 30-second demo on my blog: [I built Couch Snake, the classic phone game for the Apple TV](https://flaviocopes.com/couch-snake/).
 
-[![Watch the 30-second Snake demo](docs/showreel-poster.jpg)](https://flaviocopes.com/snake/)
+[![Watch the 30-second Couch Snake demo](docs/showreel-poster.jpg)](https://flaviocopes.com/couch-snake/)
 
 ## Features
 
@@ -20,7 +20,7 @@ Read the announcement and watch the 30-second demo on my blog: [I built Snake, t
 - Your player name shows above the board, and your best score shows top right as `HI`
 - The game pauses when you leave the app
 
-<img src="docs/screenshot.png" alt="Snake on the Apple TV, with the snake, the food and the start message on a green LCD screen" />
+<img src="docs/screenshot.png" alt="Couch Snake on the Apple TV, with the snake, the food and the start message on a green LCD screen" />
 
 ## How to play
 
@@ -31,9 +31,9 @@ Read the announcement and watch the 30-second demo on my blog: [I built Snake, t
 
 ## Install it on your Apple TV
 
-The Apple TV can't install apps from a download, and Snake isn't on the App Store. You install it from Xcode on your own Apple TV, which takes a few minutes the first time:
+The Apple TV can't install apps from a download, and Couch Snake isn't on the App Store. You install it from Xcode on your own Apple TV, which takes a few minutes the first time:
 
-1. Download [Snake-1.1.0-source.zip](https://github.com/flaviocopes/snake/releases/download/v1.1.0/Snake-1.1.0-source.zip) and unzip it. Put the Mac and the Apple TV on the same network. On the Apple TV, open **Settings → Remotes and Devices → Remote App and Devices**.
+1. Download [Couch-Snake-1.2.0-source.zip](https://github.com/flaviocopes/couch-snake/releases/download/v1.2.0/Couch-Snake-1.2.0-source.zip) and unzip it. Put the Mac and the Apple TV on the same network. On the Apple TV, open **Settings → Remotes and Devices → Remote App and Devices**.
 2. In Xcode, open **Window → Devices and Simulators**, click **Pair** next to your Apple TV, and type the code it shows.
 3. Open `Snake.xcodeproj`, choose the `Snake` scheme and your Apple TV, and set your own team under **Signing & Capabilities**.
 4. Press `⌘R`.
@@ -81,7 +81,7 @@ The screen is one SwiftUI `Canvas` that draws LCD pixels. Each board cell is 4 p
 
 ## Legal
 
-Snake is an independent project. It isn't affiliated with, endorsed by or sponsored by Nokia or Apple. Every pixel is drawn in code, and there are no graphics, sounds or fonts from other games in it.
+Couch Snake is an independent project. It isn't affiliated with, endorsed by or sponsored by Nokia or Apple. Every pixel is drawn in code, and there are no graphics, sounds or fonts from other games in it.
 
 Apple, Apple TV, Siri and tvOS are trademarks of Apple Inc., registered in the U.S. and other countries and regions.
 

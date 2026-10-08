@@ -59,7 +59,7 @@ struct GameView: View {
   @ViewBuilder
   private var message: some View {
     switch game.state {
-    case .ready: MessageBox(title: "SNAKE", detail: "Swipe to start", hint: "Play/Pause for players", background: screenColor)
+    case .ready: MessageBox(title: "COUCH SNAKE", detail: "Swipe to start", hint: "Play/Pause for players", background: screenColor)
     case .paused: MessageBox(title: "PAUSED", detail: "Click to continue", background: screenColor)
     case .over: MessageBox(title: "GAME OVER", detail: "Click to play again", hint: "Play/Pause for players", background: screenColor)
     case .playing: EmptyView()

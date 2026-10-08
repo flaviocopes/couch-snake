@@ -8,7 +8,7 @@
 import AppKit
 import SwiftUI
 
-let name = "Snake"
+let name = "Couch Snake"
 let tagline = "The classic phone game,\nfull screen on your Apple TV."
 let chips = ["Swipe to steer", "LCD pixels", "Through the walls"]
 let size = CGSize(width: 1280, height: 560)

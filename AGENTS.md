@@ -1,4 +1,4 @@
-# Snake
+# Couch Snake
 
 The classic snake game from old mobile phones, full screen on Apple TV. A SwiftUI tvOS app with no dependencies.
 

@@ -8,8 +8,8 @@ xcodebuild -project Snake.xcodeproj -scheme Snake -destination "platform=tvOS Si
   -derivedDataPath build/sim -quiet build
 xcrun simctl boot "$device" 2>/dev/null || true
 # A fresh simulator can fail the first install, so it gets a second try.
-xcrun simctl install "$device" build/sim/Build/Products/Debug-appletvsimulator/Snake.app \
-  || { sleep 5; xcrun simctl install "$device" build/sim/Build/Products/Debug-appletvsimulator/Snake.app; }
+xcrun simctl install "$device" "build/sim/Build/Products/Debug-appletvsimulator/Couch Snake.app" \
+  || { sleep 5; xcrun simctl install "$device" "build/sim/Build/Products/Debug-appletvsimulator/Couch Snake.app"; }
 # -best 0 shows HI 0000, and -screen 11 makes the app move on to the first color, the LCD green.
 xcrun simctl launch --terminate-running-process "$device" com.flaviocopes.snake -best 0 -screen 11 >/dev/null
 sleep 3
